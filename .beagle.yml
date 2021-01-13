@@ -13,7 +13,7 @@ pipeline:
 
   build:
     image: registry.cn-qingdao.aliyuncs.com/wod/golang:1.15.6-alpine
-    dns: 223.5.5.5
+    dns: 114.114.114.114
     volumes:
       - /data/cache/golang/pkg/:/go/pkg/ 
     environment:

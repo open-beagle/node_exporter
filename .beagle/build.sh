@@ -2,16 +2,9 @@
 
 set -ex
 
-function download () {
-  local to=$1
-  local url=$2
-
-  curl -fSL --output "${to}" "${url}"
-}
-
 mkdir -p dist
 
-download dist/promu-0.5.0.linux-amd64.tar.gz https://dl.wodcloud.com/beagle/promu/promu-0.5.0.linux-amd64.tar.gz
+curl -fSL --output dist/promu-0.5.0.linux-amd64.tar.gz https://dl.wodcloud.com/beagle/promu/promu-0.5.0.linux-amd64.tar.gz
 cd dist
 tar zxf promu-0.5.0.linux-amd64.tar.gz
 mv promu-0.5.0.linux-amd64/promu $GOPATH/bin/promu
