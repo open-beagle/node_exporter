@@ -6,14 +6,16 @@ function download () {
   local to=$1
   local url=$2
 
-  curl -fsSL --output "${to}" "${url}"
+  curl -fSL --output "${to}" "${url}"
 }
 
 mkdir -p dist
 
 download dist/promu-0.5.0.linux-amd64.tar.gz https://dl.wodcloud.com/beagle/promu/promu-0.5.0.linux-amd64.tar.gz
-tar zxf dist/promu-0.5.0.linux-amd64.tar.gz
+cd dist
+tar zxf promu-0.5.0.linux-amd64.tar.gz
 mv promu-0.5.0.linux-amd64/promu $GOPATH/bin/promu
+cd ..
 
 export GOARCH=amd64
 make build
