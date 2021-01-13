@@ -19,7 +19,6 @@ pipeline:
     environment:
       - GOPROXY=https://goproxy.cn
     commands:
-      - go get github.com/prometheus/prometheus/cmd/promtool
       - bash .beagle/build.sh
 
   docker:
