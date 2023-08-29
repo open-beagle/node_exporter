@@ -98,10 +98,7 @@ steps:
         from_secret: REGISTRY_PASSWORD_ALIYUN
 
   - name: docker-arch
-    image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker-manifest:v1.2.3
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
+    image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker-manifest:1.0
     settings:
       platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/mips64le
       template: registry.cn-qingdao.aliyuncs.com/wod/node-exporter:v1.0.1-ARCH
@@ -113,14 +110,21 @@ steps:
 
 ---
 kind: secret
+name: SOCKS5_PROXY
+get:
+  name: SOCKS5_PROXY
+  path: devops-secrets
+
+---
+kind: secret
 name: REGISTRY_USER_ALIYUN
 get:
-  path: devops-registry-aliyun
-  name: USERNAME
+  name: REGISTRY_USER_ALIYUN
+  path: devops-secrets
 
 ---
 kind: secret
 name: REGISTRY_PASSWORD_ALIYUN
 get:
-  path: devops-registry-aliyun
-  name: PASSWORD
+  name: REGISTRY_PASSWORD_ALIYUN
+  path: devops-secrets
