@@ -1,30 +1,28 @@
 kind: pipeline
 name: docker
 
-platform:
-  runner: 10.11.92.36
+trigger:
+  branch:
+    - release-v1.0
 
 volumes:
-  - name: go
-    host:
-      path: /data/cache/golang/pkg
   - name: docker
     host:
       path: /var/run/docker.sock
 
 workspace:
-  path: github.com/prometheus/node_exporter
+  path: /go/src/github.com/prometheus/node_exporter
+
+clone:
+  disable: true
 
 steps:
+  - name: fetch
+    image: registry.cn-qingdao.aliyuncs.com/wod/devops-git:1.0
+
   - name: golang
-    image: registry.cn-qingdao.aliyuncs.com/wod/golang:1.17.3-bullseye
-    volumes:
-      - name: go
-        path: /go/pkg
-    environment:
-      GOPROXY: https://goproxy.cn
+    image: registry.cn-qingdao.aliyuncs.com/wod/golang:1.20-alpine
     commands:
-      - git apply .beagle/0001-promu.patch
       - bash .beagle/build.sh
 
   - name: docker-amd64
