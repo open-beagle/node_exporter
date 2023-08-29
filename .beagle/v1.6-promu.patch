@@ -1,0 +1,25 @@
+From 676ff25dda82a24568b01bdfb01e772cf6989506 Mon Sep 17 00:00:00 2001
+From: shucheng <shucheng@bd-apaas.com>
+Date: Tue, 29 Aug 2023 19:36:09 +0800
+Subject: [PATCH] xx
+
+---
+ Makefile.common | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.common b/Makefile.common
+index b111d25..3aa40cd 100644
+--- a/Makefile.common
++++ b/Makefile.common
+@@ -235,7 +235,7 @@ promu: $(PROMU)
+ 
+ $(PROMU):
+ 	$(eval PROMU_TMP := $(shell mktemp -d))
+-	curl -s -L $(PROMU_URL) | tar -xvzf - -C $(PROMU_TMP)
++	curl -x socks5://www.ali.wodcloud.com:1283 -s -L $(PROMU_URL) | tar -xvzf - -C $(PROMU_TMP)
+ 	mkdir -p $(FIRST_GOPATH)/bin
+ 	cp $(PROMU_TMP)/promu-$(PROMU_VERSION).$(GO_BUILD_PLATFORM)/promu $(FIRST_GOPATH)/bin/promu
+ 	rm -r $(PROMU_TMP)
+-- 
+2.39.2
+
